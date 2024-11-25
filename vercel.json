@@ -5,3 +5,4 @@
   ],
   "routes": [
     { "src": "/api/tasks", "dest": "index.js" }
+  ]
