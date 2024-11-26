@@ -29,7 +29,7 @@ async function connectToDatabase() {
         throw error;
     }
 }
-connectToDatabase();
+
 app.get('/', async (req, res) => {
     try {
         await connectToDatabase(); // Ensure MongoDB is connected
