@@ -29,7 +29,7 @@ async function connectToDatabase() {
         throw error;
     }
 }
-
+connectToDatabase();
 const PORT = 5000;
 
 app.listen(PORT, () => {
