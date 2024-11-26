@@ -5,10 +5,7 @@ const taskRoutes = require("./src/routes/taskRoutes");
 require("dotenv").config();
 //middleware
 const app = express();
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.log(err));
+
 app.get('/', async (req, res)=>{
    try {
         const db = await mongoose.connect(process.env.MONGO_URI, {
