@@ -44,9 +44,10 @@ app.get("/api/tasks/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-app.post("/api/tasks/update/:id", async (req, res) => {
+app.post("/api/tasks/update/", async (req, res) => {
   try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+    const { id } = req.body;
+    const task = await Task.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     if (!task) return res.status(404).json({ message: "Task not found" });
@@ -55,9 +56,10 @@ app.post("/api/tasks/update/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-app.post("/api/tasks/delete/:id", async (req, res) => {
+app.post("/api/tasks/delete/", async (req, res) => {
   try {
-    const task = await Task.findByIdAndDelete(req.params.id);
+    const { id } = req.body;
+    const task = await Task.findByIdAndDelete(id);
     if (!task) return res.status(404).json({ message: "Task not found" });
     res.status(200).json({ message: "Task deleted successfully" });
   } catch (err) {
