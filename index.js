@@ -30,6 +30,20 @@ async function connectToDatabase() {
     }
 }
 connectToDatabase();
+app.get('/', async (req, res) => {
+    try {
+        await connectToDatabase(); // Ensure MongoDB is connected
+        if (req.method === "GET") {
+            const tasks = await Task.find(); // Fetch tasks
+            return res.status(200).json(tasks);
+        } else {
+            return res.status(405).json({ error: "Method not allowed" });
+        }
+    } catch (error) {
+        console.error("Error in API:", error.message);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
 const PORT = 5000;
 
 app.listen(PORT, () => {
