@@ -12,7 +12,7 @@ app.get('/', async (req, res)=>{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        isConnected = db.connections[0].readyState; // Connection state (1 = connected)
+       
         res.send("Connected to MongoDB");
          res.end();
     } catch (error) {
