@@ -5,7 +5,7 @@
   ],
   "routes": [
     { "src": "/api/tasks/*", "dest": "index.js" },
-    { "src": "/api/tasks/delete", "dest": "index.js" },
+    { "src": "/api/tasks/delete/*", "dest": "index.js" },
     { "src": "/api/tasks/update", "dest": "index.js" }
   ]
 }
