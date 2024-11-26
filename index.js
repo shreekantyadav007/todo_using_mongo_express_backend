@@ -5,7 +5,7 @@ const taskSchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 });
-const Task =  mongoose.model("Task", taskSchema);
+const Task = mongoose.model("Task", taskSchema);
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -17,7 +17,7 @@ mongoose
   .catch((err) => console.log(err));
 app.use(cors());
 app.use(express.json());
-app.post("/", async (req, res) => {
+app.post("/api/tasks", async (req, res) => {
   try {
     const { title, description } = req.body;
     const task = new Task({ title, description });
@@ -27,15 +27,15 @@ app.post("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-app.get("/", async (req, res) => {
-    try {
-        const tasks = await Task.find();
-        res.status(200).json(tasks);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+app.get("/api/tasks", async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.status(200).json(tasks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
-app.get("/:id", async (req, res) => {
+app.get("/api/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     if (!task) return res.status(404).json({ message: "Task not found" });
@@ -44,7 +44,7 @@ app.get("/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-app.put("/:id", async (req, res) => {
+app.put("/api/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -55,7 +55,7 @@ app.put("/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-app.delete("/:id", async (req, res) => {
+app.delete("/api/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);
     if (!task) return res.status(404).json({ message: "Task not found" });
@@ -64,7 +64,6 @@ app.delete("/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 const PORT = 5000;
 
