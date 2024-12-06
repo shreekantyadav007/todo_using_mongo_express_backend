@@ -12,7 +12,7 @@ require("dotenv").config();
 //middleware
 const app = express();
 app.use(cors({
-  origin: 'https://phenomenal-kataifi-a35edd.netlify.app',
+  origin: 'https://todo-using-mongo-express.onrender.com',
   methods: 'GET,POST,PUT,DELETE', 
   allowedHeaders: 'Content-Type,Authorization', 
 }));
