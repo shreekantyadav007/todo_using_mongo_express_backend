@@ -12,7 +12,7 @@ require("dotenv").config();
 //middleware
 const app = express();
 app.use(cors({
-  origin: 'https://todo-using-mongo-express.onrender.com',
+  origin: ['https://todo-using-mongo-express.onrender.com', 'http://localhost:5173],
   methods: 'GET,POST,PUT,DELETE', 
   allowedHeaders: 'Content-Type,Authorization', 
 }));
