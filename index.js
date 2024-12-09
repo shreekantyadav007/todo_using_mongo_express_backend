@@ -69,7 +69,24 @@ app.delete("/api/tasks/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.post("/api/tasks/search", async(req, res)=>{
+try {  
+const { query } = req.body;
+  if (!query) {
+      return res.status(400).json({ error: "Query is required" });
+  }
+  const tasks = await Task.find({
+                name: { $regex: query, $options: "i" }
+            });
 
+  return res.status(200).json(tasks);
+} catch (error) {
+            console.error("Error searching tasks:", error.message);
+            return res.status(500).json({ error: error.message || "Internal server error" });
+        }    
+});
+         
+         
 const PORT = 5000;
 
 app.listen(PORT, () => {
