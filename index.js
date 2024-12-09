@@ -86,6 +86,20 @@ const { query } = req.body;
         }    
 });
          
+app.post("/api/tasks/status", async (req, res) => {
+    try {
+        const { taskId, status } = req.body;
+        if (!taskId || status === undefined)
+            return res.status(400).json({ error: "Task ID and status are required" });
+
+        const updatedTask = await Task.findByIdAndUpdate(taskId, { status }, { new: true });
+        if (!updatedTask) return res.status(404).json({ error: "Task not found" });
+
+        res.status(200).json(updatedTask);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to update status" });
+    }
+});
          
 const PORT = 5000;
 
